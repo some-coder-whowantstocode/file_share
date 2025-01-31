@@ -1,0 +1,18 @@
+hi
+hi
+hi
+hi
+/home/somecoder/Documents/web/web project/filehandling/trial
+/home/somecoder/Documents/web/web project/filehandling/trial
+/home/somecoder/Documents/web/web project/filehandling/trial
+/home/somecoder/Documents/web/web project/filehandling/trial
+/home/somecoder/Documents/web/web project/filehandling/trial
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received an instance of Array
+/home/somecoder/Documents/web/web project/filehandling/trial
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received an instance of Array
+Error: ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/req.url'
+Error: ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/req.url'
+Error: ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client,/'
+Error: ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client,/favicon.ico'
+TypeError [ERR_HTTP_INVALID_HEADER_VALUE]: Invalid value "undefined" for header "Content-Type"
+Error: ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
