@@ -20,6 +20,12 @@
 #file {
     display: none;
 }
-#fileinfo{
+#filedata{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.filelogo {
+    width: 100px;
     
 }
