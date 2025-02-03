@@ -1,84 +1,52 @@
 const http = require('node:http');
-const fs = require('fs');
-const path = require('path');
+
+const {Redirect} = require('./middleware/notFound');
+const {ServeFile} = require('./serveFile');
 
 const server = http.createServer({keepAliveTimeout:10000},async(req,res)=>{
     try {
         const urlParts = req.url.split('.');
         const extention = urlParts[urlParts.length-1];
+        console.log(urlParts)
+        
     switch (extention) {
         case "/":
-            {
-                const filepath = path.join(__dirname,'client/index.html');
-                const stat = fs.statSync(filepath);
-                
-                res.writeHead(200, {
-                    'Content-Type': 'text/html',
-                    'Content-Length': stat.size
-                });
-            
-                const readStream = fs.createReadStream(filepath);
-                readStream.pipe(res)
+            {   
+                ServeFile("text/html","/index.html",res);
             }
             break;
     
         case "js": 
             {
-                const filepath = path.join(__dirname,`client${urlParts[urlParts.length-2]}.js`);
-                const stat = fs.statSync(filepath);
-                
-                res.writeHead(200, {
-                    'Content-Type': 'application/javascript',
-                    'Content-Length': stat.size
-                });
-            
-                const readStream = fs.createReadStream(filepath);
-                readStream.pipe(res);
+                const url = urlParts[urlParts.length - 2]+"."+extention;
+                ServeFile('application/javascript',url,res);
             }
             break;
         
         case "css":
             {
-                const filepath = path.join(__dirname,`client${urlParts[urlParts.length-2]}.css`);
-                const stat = fs.statSync(filepath);
-
-                res.writeHead(200, {
-                    'Content-Type': 'text/css',
-                    'Content-Length': stat.size
-                });
-            
-                const readStream = fs.createReadStream(filepath);
-                readStream.pipe(res);
+                const url = urlParts[urlParts.length - 2]+"."+extention;
+                ServeFile('text/css',url,res);
             }
             break;
         
         default:
             const regex = /assets/
-            if(regex.test(req.url)){
-                const filepath = path.join(__dirname,"/client/assets/",req.url.split("assets/")[1]);
-                const stat = fs.statSync(filepath);
-                if ( !stat.isFile()){
-                    res.end("404 not found");
-                }else {
+                const url = urlParts[urlParts.length - 2]+"."+extention;
                     const type = req.url.split('.').pop();
                     const assetType = {
                         "jpg":"image/jpg",
                         "png":"image/png"
                     }
-                    res.writeHead(200, {
-                        'Content-Type': assetType[type],
-                        'Content-Length': stat.size
-                    }); 
-                    const readStream = fs.createReadStream(filepath);
-                    readStream.pipe(res);   
-                }
-            }else {
-                res.end("404 page not found");
-            }
+                    ServeFile(assetType[type],url,res)
+           
             break;
     }
 } catch (error) {
-    console.log(error)
+    if(error.code === "ENOENT"){
+        Redirect(res,"NotFound");
+    }
+    console.warn("lol",error)
 }
 })
 

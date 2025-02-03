@@ -1,4 +1,4 @@
-  import './store.js'
+  import {FILE_INFORMATION, addFileInfo, clearFileInfo} from './store.js'
   const file = document.getElementById("file");
 
   const Renderer = (element) => {
@@ -73,6 +73,7 @@
             if(filedata){
               const node = document.getElementById(filedata);
               const div = document.createElement('div');
+              // div.setAttribute('id',`filedata${}`)
               if(img){
                 div.appendChild(img);
               }
@@ -86,6 +87,28 @@
           }
   }
 
+  const GenerateAll =()=>{
+    const filedata = "filedata";
+    const existingFile = document.getElementById(filedata);
+    existingFile && existingFile.remove();
+    console.log(existingFile)
+
+    const newfiledata = {
+      elem: "div",
+      attr:[
+        ["id",filedata]
+      ]
+    };
+    const elem = Renderer(newfiledata);
+    if(elem){
+      document.body.appendChild(elem);
+    }
+
+    FILE_INFORMATION.map((info)=>{
+      GenerateFile(filedata,info);
+    })
+  }
+
   file &&
     file.addEventListener("input", (e) => {
       try {
@@ -94,27 +117,14 @@
 
         const { files } = element;
 
-        const filedata = "filedata";
-        const existingFile = document.getElementById(filedata);
-        existingFile && existingFile.remove();
-
-        const newfiledata = {
-          elem: "div",
-          attr:[
-            ["id",filedata]
-          ]
-        };
-        const elem = Renderer(newfiledata);
-        if(elem){
-          document.body.appendChild(elem);
-        }
-       
         
+        clearFileInfo();
         if (files && files.length > 0) {
           for (let i=0;i<files.length;i++){
-            GenerateFile(filedata,files[i]);
+            addFileInfo(files[i]);
           }
         }
+        GenerateAll()
       } catch (error) {
         console.log(error);
       }
