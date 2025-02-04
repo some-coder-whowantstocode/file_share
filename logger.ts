@@ -15,14 +15,14 @@ const create = async()=>{
    
 }
 
-const write = async(message)=>{
+export const write = async(message:string)=>{
     try{
         await create();
-        fs.open(filepath,'a',(err,fd)=>{
+        fs.open(filepath,'a',(err:Error,fd:any)=>{
             if(err) console.log(err);
 
             try{
-                fs.appendFile(fd,message+'\n','utf-8',(err)=>{
+                fs.appendFile(fd,message+'\n','utf-8',(err:Error)=>{
                     if(err){
                         console.log(err)
                     }
@@ -36,5 +36,3 @@ const write = async(message)=>{
         console.log("error while logger write",write);
     }
 }
-
-module.exports = { write}
