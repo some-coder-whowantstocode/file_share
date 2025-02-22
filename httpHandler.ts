@@ -24,7 +24,7 @@ const handler = (req: any, res: any) => {
             return;
           }
           req.body = body;
-          // console.log(body)
+          console.log(body)
           if (Apiroute[1] == "API") {
             errorHandler(req,res,ApiHandler)
             // ApiHandler(req, res);

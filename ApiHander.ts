@@ -1,9 +1,10 @@
 import { uploadfile } from "./controllers/Upload";
+import { errorHandler } from "./middleware/errorHandler";
 
-export const ApiHandler =(req:Request,res:Response)=>{
+export const ApiHandler =(req:any,res:any)=>{
     switch(req.url){
         case "/API/uploadfile" :
-            uploadfile(req,res);
+            errorHandler(req,res,uploadfile);
         break;
 
         default:
