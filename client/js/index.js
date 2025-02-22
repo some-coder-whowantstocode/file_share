@@ -117,10 +117,17 @@
 
         const { files } = element;
 
-        
+        const reader = new FileReader();
+
+        // reader.onload = (event)=>{
+        //   const filedata = event.target.result;
+        //   console.log(filedata);
+        // }
         clearFileInfo();
         if (files && files.length > 0) {
           for (let i=0;i<files.length;i++){
+            // reader.readAsArrayBuffer(files[i])
+          uploadFile(files[i]);
             addFileInfo(files[i]);
           }
         }
@@ -129,3 +136,38 @@
         console.log(error);
       }
     });
+
+
+const uploadFile = async(file)=>{
+  try {
+    const chunkSize = 1024 * 1024;
+    const totalChunks = Math.ceil(file.size/chunkSize);
+    if (totalChunks != 1) {
+      console.log("maximum size 1 mb allowed")
+      return;
+    }
+    let currentChunk = 0;
+    // console.log(totalChunks)
+   const start = currentChunk * chunkSize;
+   const end = Math.min(start + chunkSize, file.size);
+   const blob = file.slice(start,end);
+  //  const base64blob = await 
+   const response = await fetch("API/uploadfile",{
+    method:"POST",
+    headers:{
+      "Content-Type": "application/json",
+    },
+    body:JSON.stringify({
+      start,
+      end,
+      blob,
+      chunkSize,
+      currentChunk
+    })
+   })
+  //  const jsonbody = await (response) 
+   console.log(response.body)
+  } catch (error) {
+    console.log(error)
+  }
+}

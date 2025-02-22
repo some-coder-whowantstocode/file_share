@@ -6,12 +6,11 @@ export const ServeFile = (contentType : String, url: String, res: Response) => {
     __dirname,
     `client${url}`
   );
-  console.log(filepath)
   const stat = fs.statSync(filepath);
 
   (res as any).writeHead(200, {
     "Content-Type": contentType,
-    'Cache-Control': 'public, max-age=3600',
+    // 'Cache-Control': 'public, max-age=3600',
     "Content-Length": stat.size
   });
 
