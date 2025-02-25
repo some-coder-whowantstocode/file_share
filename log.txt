@@ -166,3 +166,37 @@ ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web proje
 The "chunk" argument must be of type string or an instance of Buffer or Uint8Array. Received an instance of Object
 ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
 ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+req.body.blob.arrayBuffer is not a function
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+req.body.blob.then is not a function
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+The first argument must be of type string or an instance of Buffer, ArrayBuffer, or Array or an Array-like Object. Received an instance of Object
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+Cannot read properties of undefined (reading 'name')
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+Cannot read properties of undefined (reading 'name')
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'

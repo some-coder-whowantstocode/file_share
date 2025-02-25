@@ -133,6 +133,15 @@ file &&
     }
   });
 
+  // const blobtoBase64 = (blob)=>{
+  //   return new Promise((resolve, reject)=>{
+  //     const reader = new FileReader();
+  //     reader.onloadend = ()=> resolve(reader.result);
+  //     reader.onerror = reject;
+  //     reader.readAsDataURL(blob);
+  //   })
+  // }
+
 const uploadFile = async (file) => {
   try {
     const chunkSize = 1024 * 1024;
@@ -144,11 +153,14 @@ const uploadFile = async (file) => {
     const reader = new FileReader();
 
     reader.onload = async(event) => {
-      const filedata = event.target.result;
+      let filedata = event.target.result;
+      console.log(filedata)
+      filedata = filedata.replace(/^data:application\/pdf;base64,/, '');
+      console.log(filedata)
       let currentChunk = 0;
       const start = currentChunk * chunkSize;
       const end = Math.min(start + chunkSize, file.size);
-      const blob = filedata.slice(start, end);
+    
 
       const response = await fetch("API/uploadfile", {
         method: "POST",
@@ -158,13 +170,13 @@ const uploadFile = async (file) => {
         body: JSON.stringify({
           start,
           end,
-          blob,
+          blob:filedata,
           chunkSize,
           currentChunk,
+          name:file.name,
         }),
       });
       //  const jsonbody = await (response)
-      console.log(response.body)
       const reader = response.body.getReader();
       const {done, value} = await reader.read();
       const decoder = new TextDecoder();
@@ -174,7 +186,7 @@ const uploadFile = async (file) => {
         console.log(value)
       }
     };
-    reader.readAsArrayBuffer(file);
+    reader.readAsDataURL(file);
 
     //  const base64blob = await
    

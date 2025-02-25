@@ -17,17 +17,15 @@ const handler = (req: any, res: any) => {
           data.push(chunk);
         })
         req.on('end',()=>{
-          const body = Buffer.concat(data).toString();
+          const body = JSON.parse(Buffer.concat(data).toString());
           if(body == ""){
             res.writeHead(200);
             res.end(JSON.stringify({err:"body not found."}));
             return;
           }
           req.body = body;
-          console.log(body)
           if (Apiroute[1] == "API") {
             errorHandler(req,res,ApiHandler)
-            // ApiHandler(req, res);
           }
         })
         
