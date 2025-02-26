@@ -200,3 +200,8 @@ Cannot read properties of undefined (reading 'name')
 ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
 ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
 ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
+ENOENT: no such file or directory, stat '/home/somecoder/Documents/web/web project/filehandling/trial/client/favicon.ico'
