@@ -1,23 +1,38 @@
-import fs from 'fs';
+import fs from "fs";
 
-export const uploadfile = (req:any, res:any)=>{
-    res.writeHead(200, {
-        "Content-Type": "application/json",
-    });
+export const uploadfile = (req: any, res: any) => {
+  const { start, end, blob, name } = req.body;
 
+  const files = fs.readdirSync('./uploading');
 
-    const base64string = req.body.blob;
+  const exists = files.find(file=>file === name);
 
-    const filedata = base64string;
-    // console.log(filedata)
+  const filepath = `./uploading/${name}`;
 
-    // fs.writeFile(`./uploaded/${req.body.name}`,filedata,(err)=>{
-    //     if(err){
-    //         console.log(err);
-    //     }
-    //     console.log("file craeted lol")
-    // })
-    
+  console.log(exists)
 
-    res.end(JSON.stringify({message:"super"}))
-}
+  if (!exists){
+    fs.writeFileSync(filepath,blob)
+  }else {
+    const filedata = fs.statSync(filepath);
+
+    if (filedata.size > start ){
+      res.writeHead(400);
+      res.end(JSON.stringify({err:"file upload is corrupted"}));
+      return;
+    }
+  
+    fs.writeFileSync(filepath,blob,{flag:"a+"});
+  
+   
+  }
+
+  if(end){
+    const newPath = `./uploaded/${name}`;
+    fs.renameSync(filepath,newPath);
+  }
+ 
+  res.writeHead(201);
+  res.end(JSON.stringify({msg:"chunk uploaded"}));
+
+};

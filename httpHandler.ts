@@ -7,7 +7,7 @@ interface typeStore {
   [key: string]: String;
 }
 
-const handler = (req: any, res: any) => {
+export const handler = (req: any, res: any) => {
   const Apiroute = req.url.split("/");
   switch (req.method) {
     case "POST":
@@ -17,16 +17,20 @@ const handler = (req: any, res: any) => {
           data.push(chunk);
         })
         req.on('end',()=>{
-          const body = JSON.parse(Buffer.concat(data).toString());
-          if(body == ""){
-            res.writeHead(200);
-            res.end(JSON.stringify({err:"body not found."}));
-            return;
+          try {
+          if(data.length === 0){
+            throw new Error("body not found");
           }
+          const body = JSON.parse(Buffer.concat(data).toString());
           req.body = body;
           if (Apiroute[1] == "API") {
             errorHandler(req,res,ApiHandler)
           }
+          } catch (error : any) {
+            res.writeHead(500);
+            res.end("something went wrong")
+          }
+          
         })
         
       }
@@ -83,4 +87,3 @@ const handler = (req: any, res: any) => {
   }
 };
 
-module.exports = { handler };

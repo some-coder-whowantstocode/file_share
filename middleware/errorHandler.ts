@@ -7,7 +7,6 @@ export const errorHandler =async(req : any,res: any, handler : Function)=>{
             // RateLimiter(req,res);
             handler(req,res);
             } catch (error:any) {
-                console.log(error)
                 write((error.message as string))
                 const errorCode = (error as any).code;
                 switch(errorCode){

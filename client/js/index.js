@@ -133,35 +133,23 @@ file &&
     }
   });
 
-  // const blobtoBase64 = (blob)=>{
-  //   return new Promise((resolve, reject)=>{
-  //     const reader = new FileReader();
-  //     reader.onloadend = ()=> resolve(reader.result);
-  //     reader.onerror = reject;
-  //     reader.readAsDataURL(blob);
-  //   })
-  // }
-
 const uploadFile = async (file) => {
   try {
     const chunkSize = 1024 * 1024;
     const totalChunks = Math.ceil(file.size / chunkSize);
-    if (totalChunks != 1) {
-      console.log("maximum size 1 mb allowed");
-      return;
-    }
+  
     const reader = new FileReader();
 
     reader.onload = async(event) => {
       let filedata = event.target.result;
-      console.log(filedata)
       filedata = filedata.replace(/^data:application\/pdf;base64,/, '');
-      console.log(filedata)
-      let currentChunk = 0;
-      const start = currentChunk * chunkSize;
-      const end = Math.min(start + chunkSize, file.size);
-    
+      for(let i=0;i<totalChunks;i++){
 
+      const start = i * chunkSize;
+      const end = Math.min(start + chunkSize, file.size);
+      const chunk = filedata.slice(start,end);
+      
+    
       const response = await fetch("API/uploadfile", {
         method: "POST",
         headers: {
@@ -169,26 +157,23 @@ const uploadFile = async (file) => {
         },
         body: JSON.stringify({
           start,
-          end,
-          blob:filedata,
-          chunkSize,
-          currentChunk,
-          name:file.name,
+          end:i==totalChunks-1,
+          blob:chunk,
+          name:file.name
         }),
       });
-      //  const jsonbody = await (response)
+
       const reader = response.body.getReader();
-      const {done, value} = await reader.read();
+      const {value} = await reader.read();
+      console.log(value)
       const decoder = new TextDecoder();
       const text = decoder.decode(value);
-      console.log(done,text)
-      if(done){
-        console.log(value)
-      }
+      console.log(text)
+    }
+     
     };
     reader.readAsDataURL(file);
 
-    //  const base64blob = await
    
   } catch (error) {
     console.log(error);

@@ -1,7 +1,7 @@
 import http from 'http';
 
-const {errorHandler} = require('./middleware/errorHandler');
-const {handler} = require('./httpHandler');
+import { errorHandler } from './middleware/errorHandler';
+import {handler} from './httpHandler'
 
 const server = http.createServer({keepAliveTimeout:10000},(req,res)=>{
     errorHandler(req,res,handler)
