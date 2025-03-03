@@ -38,6 +38,7 @@ export const handler = (req: any, res: any) => {
 
     case "GET":
       {
+        
           const urlParts = req.url.split(".");
           const extention = urlParts[urlParts.length - 1];
           switch (extention) {
