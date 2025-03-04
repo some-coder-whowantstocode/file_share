@@ -1,5 +1,6 @@
 import { ApiHandler } from "./ApiHander";
 import { errorHandler } from "./middleware/errorHandler";
+import { Redirect } from "./middleware/notFound";
 
 const { ServeFile } = require("./serveFile");
 
@@ -40,47 +41,52 @@ export const handler = (req: any, res: any) => {
       {
         
           const urlParts = req.url.split(".");
-          const extention = urlParts[urlParts.length - 1];
-          switch (extention) {
-            case "/":
-              {
-                ServeFile("text/html", "/index.html", res);
-              }
-              break;
-
-            case "js":
-              {
-                const url = urlParts[urlParts.length - 2] + "." + extention;
-                ServeFile("application/javascript", url, res);
-              }
-              break;
-
-            case "css":
-              {
-                const url = urlParts[urlParts.length - 2] + "." + extention;
-                ServeFile("text/css", url, res);
-              }
-              break;
-
-            default:
-              // const regex = /assets/
-              let url = urlParts[urlParts.length - 2] + "." + extention;
-              if (url) {
-                const t = req.url.split(".").pop();
-                const assetType: typeStore = {
-                  jpg: "image/jpg",
-                  png: "image/png",
-                  ico: "image/x-icon",
-                };
-                // if(t == "ico"){
-                //     url = "/assets"+url
-                // }
-                const contentType = assetType[t as string] || "";
-                ServeFile(contentType, url, res);
-              }
-
-              break;
+          const extentionExists = urlParts.length > 1;
+          
+          if (extentionExists){
+            const extention = urlParts[urlParts.length - 1];
+            switch (extention) {
+             
+              case "js":
+                {
+                  const url = urlParts[urlParts.length - 2] + "." + extention;
+                  ServeFile("application/javascript", url, res);
+                }
+                break;
+  
+              case "css":
+                {
+                  const url = urlParts[urlParts.length - 2] + "." + extention;
+                  ServeFile("text/css", url, res);
+                }
+                break;
+  
+              default:
+                let url = urlParts[urlParts.length - 2] + "." + extention;
+                if (url) {
+                  const t = req.url.split(".").pop();
+                  const assetType: typeStore = {
+                    jpg: "image/jpg",
+                    png: "image/png",
+                    ico: "image/x-icon",
+                  };
+                
+                  const contentType = assetType[t as string] || "";
+                  ServeFile(contentType, url, res);
+                }
+  
+                break;
+            }
+          }else {
+            const page = urlParts[0];
+            if(page == "/" || page == "/upload" || page == "/list"){
+              ServeFile("text/html", "/index.html", res);
+            }else {
+              Redirect(res,"NotFound");
+            }
           }
+          
+          
       }
       break;
 
