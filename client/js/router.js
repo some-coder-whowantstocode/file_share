@@ -12,7 +12,6 @@ class Router {
 
 
     Render(route){
-        console.log('hi',route,nav,root)
         root.innerHTML = '';
         root.innerHTML = `
         ${nav}
@@ -33,13 +32,8 @@ class Router {
 
 const router = new Router(routes);
 
-window.addEventListener('popstate',()=>{
-    router.changePage()
-})
-
 
 window.addEventListener('customChangePage',()=>{
-    console.log('hi')
     router.changePage()
 })
 router.changePage()

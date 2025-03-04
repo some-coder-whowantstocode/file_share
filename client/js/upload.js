@@ -3,8 +3,8 @@ import { FILE_INFORMATION, addFileInfo, clearFileInfo } from "./store.js";
 class Uploader extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
-    this.shadowRoot.innerHTML = `
+    this.shadow = this.attachShadow({ mode: "closed" });
+    this.shadow.innerHTML = `
     <style>
         * {
           padding: 0;
@@ -85,12 +85,11 @@ class Uploader extends HTMLElement {
   }
 
   initialize() {
-    const file = this.shadowRoot.getElementById("file");
+    const file = this.shadow.getElementById("file");
 
     const Renderer = (element) => {
       try {
         if (typeof element !== "object" || element === null) {
-          console.log("Renderer inside custom renderer only accepts objects");
           return null;
         }
         const {

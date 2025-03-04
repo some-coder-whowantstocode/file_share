@@ -3,8 +3,8 @@ import { changePageEvent } from "./event.js";
 class Navbar extends HTMLElement {
     constructor(){
         super();
-        this.attachShadow({mode:'open'});
-        this.shadowRoot.innerHTML = `
+        this.shadow = this.attachShadow({mode:'closed'});
+        this.shadow.innerHTML = `
         <style>
         .nav{
         display:flex;
@@ -34,13 +34,13 @@ class Navbar extends HTMLElement {
             >Logo</div>
             <div class="location">
                 <p
-                onclick="changeLocation('/')"
+                val="/"
                 >Home</p>
                 <p
-                onclick="changeLocation('/upload')"
+                val="upload"
                 >Upload</p>
                 <p
-                onclick="changeLocation('list')"
+                val="list"
                 >Files</p>
             </div>
 
@@ -49,14 +49,18 @@ class Navbar extends HTMLElement {
         this.initialize();
     }
 
-    changeLocation(location){
-        window.dispatchEvent(changePageEvent);
-        history.pushState(null,null,location)
-    }
+    
+    
 
     initialize(){
-       
-        window.changeLocation = this.changeLocation.bind(this)
+        const locations = this.shadow.querySelector(".location");
+        function changeLocation(event){
+            history.pushState(null,null,event.target.getAttribute("val"))
+            window.dispatchEvent(changePageEvent);
+        }
+        Array.from(locations.children).map((child)=>{
+            child.addEventListener("click",changeLocation)
+        })
     }
 }
 
