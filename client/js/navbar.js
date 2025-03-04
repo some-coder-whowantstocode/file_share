@@ -1,3 +1,5 @@
+import { changePageEvent } from "./event.js";
+
 class Navbar extends HTMLElement {
     constructor(){
         super();
@@ -48,7 +50,8 @@ class Navbar extends HTMLElement {
     }
 
     changeLocation(location){
-        window.location.replace(location);
+        window.dispatchEvent(changePageEvent);
+        history.pushState(null,null,location)
     }
 
     initialize(){

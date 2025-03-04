@@ -36,4 +36,10 @@ const router = new Router(routes);
 window.addEventListener('popstate',()=>{
     router.changePage()
 })
+
+
+window.addEventListener('customChangePage',()=>{
+    console.log('hi')
+    router.changePage()
+})
 router.changePage()
