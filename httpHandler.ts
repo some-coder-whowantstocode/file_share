@@ -42,6 +42,10 @@ export const handler = (req: any, res: any) => {
         
           const urlParts = req.url.split(".");
           const extentionExists = urlParts.length > 1;
+          if (Apiroute[1] == "API") {
+            errorHandler(req,res,ApiHandler)
+          }else {
+
           
           if (extentionExists){
             const extention = urlParts[urlParts.length - 1];
@@ -85,7 +89,7 @@ export const handler = (req: any, res: any) => {
               Redirect(res,"NotFound");
             }
           }
-          
+        }
           
       }
       break;

@@ -1,6 +1,7 @@
 import { routes } from "./routes.js";
 import './upload.js'
 import nav from './navbar.js'
+import './list.js'
 
 const root = document.querySelector('#root');
 

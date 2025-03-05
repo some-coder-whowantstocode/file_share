@@ -5,6 +5,8 @@ export const listFiles =(req:any,res:any)=>{
         if(err){
             console.log(err);
         }else {
+            res.writeHead(200);
+            res.end(JSON.stringify({files}));
             console.log(files)
         }
     })
