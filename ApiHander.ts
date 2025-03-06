@@ -4,8 +4,20 @@ import { listFiles } from "./controllers/list";
 import { uploadfile } from "./controllers/Upload";
 import { errorHandler } from "./middleware/errorHandler";
 
+interface obj {
+    [key :string]:string 
+}
+
 export const ApiHandler =(req:any,res:any)=>{
-    switch(req.url){
+    const querys = req.url.split("?");
+    const allqueries :obj = {};
+    for(let i=1;i<querys.length;i++){
+        const [key,value] = querys[i].split("=");
+
+            allqueries[key] = value ;
+    }
+    req.queries = allqueries
+    switch(querys[0]){
         case "/API/uploadfile" :
             errorHandler(req,res,uploadfile);
         break;
