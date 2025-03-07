@@ -26,6 +26,7 @@ class FileList extends HTMLElement {
             const response = await fetch(`/API/downloadFile?filename=${filename}`);
             const blob = await response.blob(); 
             const url = window.URL.createObjectURL(blob);
+            console.log(url)
     
             const a = document.createElement('a');
             a.href = url;
